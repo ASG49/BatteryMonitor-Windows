@@ -1,2 +1,34 @@
 # BatteryMonitor-Windows
 Windows desktop app for real-time battery monitoring with live charts, CSV recording, and DC-DC charging efficiency analysis
+
+# BatteryMonitor-Windows
+
+Windows desktop app for real-time battery monitoring, long-duration cycle 
+logging, and DC-DC charging efficiency analysis.
+
+## Features
+- Real-time voltage, current, and power charting
+- CSV auto-recording for long multi-hour discharge cycles
+- TC66 USB meter integration
+- DC-DC charging efficiency analysis
+- Charge/discharge segmentation with legend
+
+## Requirements
+- Windows 10/11
+- .NET Framework 4.0 or later
+- TC66 USB meter (optional, for external current measurement)
+
+## Installation
+Download the latest release from the [Releases](../../releases) page.  
+No installation required — run the executable directly.
+
+## Usage
+1. Connect your TC66 USB meter (optional)
+2. Launch BatteryMonitor.exe
+3. CSV data is auto-recorded to the application folder
+
+## Version
+Current release: v30.6
+
+## License
+MIT License
