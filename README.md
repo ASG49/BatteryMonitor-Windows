@@ -1,5 +1,5 @@
 Windows desktop app for real-time battery monitoring, long-duration cycle 
-logging, and DC-DC charging efficiency analysis.
+logging, and, optionally, DC-DC charging efficiency analysis using TC66 USB testers.
 
 ## Features
 - Real-time voltage, current, and power charting
