@@ -23,7 +23,7 @@ No installation required — run the executable directly.
 3. CSV data is auto-recorded to the application folder
 
 ## Version
-Current release: v31.0
+Current release: v31.1
 
 ## License
 MIT License
