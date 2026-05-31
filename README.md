@@ -12,10 +12,14 @@ Windows desktop app for real-time battery monitoring, long-duration cycle loggin
 **Analysis tools:**
 - 3-click linear regression on the SOC curve for time-to-empty prediction with R² confidence
 - 2-click running average on any curve (BMS and TC66)
-- DC-DC charging efficiency (η) with system baseline power (Psys) correction
+- DC-DC charging efficiency (CE) with system baseline power (Psys) correction
 - Charge/discharge/idle state segmentation with color-coded curves
 
-**Header display:** two rows showing BMS fields (Status, V, i, R, P, SOC, Qc, Ec, Qt, Et, H=, Cyc) and TC66 fields (V, i, R, P, Qin, Ein, η, Ttc) with ETA and battery health
+**Header display:** two rows with uniform `symbol=value` notation — BMS fields (Status, U=, i=, R=, P=, SOC=, Qc=, Ec=, Qt=, Et=, SoH=, Cyc=) and TC66 fields (U=, i=, R=, P=, Qin=, Ein=, CE=, T.TC=) with ETA and auto-sizing font to fit any screen width
+
+**Alerts:**
+- **Charge-complete:** triple beep (880 Hz) every 60 seconds for 10 minutes when charging current drops to zero — signals time to start a discharge cycle; dismissed by red ✕ Beep button on the footer
+- **Low SOC:** single beep (660 Hz) at 10% SOC during discharge, then at every 1% step down to 1% — warns that full discharge is approaching
 
 **Data & UI:**
 - CSV auto-recording toggle for long multi-hour cycles
@@ -46,6 +50,7 @@ The included `app.manifest` requests administrator privileges (`requireAdministr
 2. Optionally connect a TC66 USB meter and click **Connect**
 3. Click **Start** to begin recording; CSV data is auto-saved to the application folder
 4. Use the SOC chart for linear regression time-to-empty (3 clicks); power chart for 2-click running average
+5. At end of charge, a triple beep alerts you to start a discharge cycle; single beeps warn of low SOC during discharge
 
 ## Battery Temperature — Known Limitation
 
@@ -59,7 +64,7 @@ The app includes WMI infrastructure to display battery cell temperature if expos
 
 Lenovo Vantage displays a battery temperature (e.g. 35°C on the Yoga 7) that differs from all WMI thermal zones — it reads via a proprietary EC/SMBus interface not exposed to Windows. The standard `IOCTL_BATTERY_QUERY_INFORMATION` with `BatteryTemperature` returns "not supported" on all three machines even when run as Administrator.
 
-The TC66 temperature (`Ttc=`) displayed in the header is the USB meter's own internal sensor, not the battery cell temperature. This is a hardware/driver limitation with no known workaround short of reverse-engineering the Lenovo EC interface.
+The TC66 temperature (`T.TC=`) displayed in the header is the USB meter's own internal sensor, not the battery cell temperature. This is a hardware/driver limitation with no known workaround short of reverse-engineering the Lenovo EC interface.
 
 ## Version
 
