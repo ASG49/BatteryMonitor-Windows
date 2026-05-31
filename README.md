@@ -10,12 +10,12 @@ Windows desktop app for real-time battery monitoring, long-duration cycle loggin
 - **Chart 2 — SOC, Power & Temperature:** power, state of charge, cumulative energy (Ec/Et), and TC66 temperature
 
 **Analysis tools:**
-- 3-click linear regression on the SOC curve for time-to-empty prediction with R² confidence
+- 3-click linear regression on the SOC curve for TT5 prediction (time to 5% SOC) with R² confidence
 - 2-click running average on any curve (BMS and TC66)
 - DC-DC charging efficiency (CE) with system baseline power (Psys) correction
 - Charge/discharge/idle state segmentation with color-coded curves
 
-**Header display:** two rows with uniform `symbol=value` notation — BMS fields (Status, U=, i=, R=, P=, SOC=, Qc=, Ec=, Qt=, Et=, SoH=, Cyc=) and TC66 fields (U=, i=, R=, P=, Qin=, Ein=, CE=, T.TC=) with ETA and auto-sizing font to fit any screen width
+**Header display:** two rows with uniform `symbol=value` notation — BMS fields (Status, U=, i=, R=, P=, SOC=, Qc=, Ec=, Qt=, Et=, SoH=, Cyc=) and TC66 fields (U=, i=, R=, P=, Qin=, Ein=, CE=, T.TC=) with TT5 countdown and auto-sizing font to fit any screen width
 
 **Alerts:**
 - **Charge-complete:** triple beep (880 Hz) every 60 seconds for 10 minutes when charging current drops to zero — signals time to start a discharge cycle; dismissed by red ✕ Beep button on the footer
@@ -49,7 +49,7 @@ The included `app.manifest` requests administrator privileges (`requireAdministr
 1. Launch `BatteryMonitor.exe` (UAC prompt will appear — accept it)
 2. Optionally connect a TC66 USB meter and click **Connect**
 3. Click **Start** to begin recording; CSV data is auto-saved to the application folder
-4. Use the SOC chart for linear regression time-to-empty (3 clicks); power chart for 2-click running average
+4. Use the SOC chart for linear regression TT5 prediction (3 clicks); power chart for 2-click running average
 5. At end of charge, a triple beep alerts you to start a discharge cycle; single beeps warn of low SOC during discharge
 
 ## Battery Temperature — Known Limitation
@@ -68,7 +68,7 @@ The TC66 temperature (`T.TC=`) displayed in the header is the USB meter's own in
 
 ## Version
 
-Current release: **v44.4**
+Current release: **v44.6**
 
 ## License
 
