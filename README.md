@@ -68,7 +68,7 @@ The TC66 temperature (`T.TC=`) displayed in the header is the USB meter's own in
 
 ## Version
 
-Current release: **v44.6**
+Current release: **v45.0**
 
 ## License
 
