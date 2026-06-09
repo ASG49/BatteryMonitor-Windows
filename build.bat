@@ -53,6 +53,27 @@ if "%CSC%"=="" (
     exit /b 1
 )
 
+REM ---- Locate System.Speech.dll in GAC ----
+set SPEECH_DLL=
+if exist "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\WPF\System.Speech.dll" (
+    set SPEECH_DLL=C:\Windows\Microsoft.NET\Framework64\v4.0.30319\WPF\System.Speech.dll
+)
+if "%SPEECH_DLL%"=="" if exist "C:\Windows\Microsoft.NET\Framework\v4.0.30319\WPF\System.Speech.dll" (
+    set SPEECH_DLL=C:\Windows\Microsoft.NET\Framework\v4.0.30319\WPF\System.Speech.dll
+)
+if "%SPEECH_DLL%"=="" (
+    for /f "delims=" %%P in ('dir /b /s "C:\Windows\assembly\GAC_MSIL\System.Speech\*\System.Speech.dll" 2^>nul') do (
+        set SPEECH_DLL=%%P
+    )
+)
+if "%SPEECH_DLL%"=="" (
+    echo ERROR: System.Speech.dll not found in GAC.
+    del BatteryMonitor.cs >nul 2>&1
+    pause
+    exit /b 1
+)
+echo Using System.Speech: %SPEECH_DLL%
+
 REM ---- STEP 4: Compile ----
 echo Compiling BatteryMonitor.cs ...
 
@@ -72,7 +93,7 @@ if exist app.manifest (
     echo WARNING: app.manifest not found - battery temperature will not be available
 )
 
-"%CSC%" /target:winexe /out:BatteryMonitor.exe %ICON_PARAM% %MANIFEST_PARAM% /reference:System.dll /reference:System.Windows.Forms.dll /reference:System.Drawing.dll /reference:System.Management.dll BatteryMonitor.cs
+"%CSC%" /target:winexe /out:BatteryMonitor.exe %ICON_PARAM% %MANIFEST_PARAM% /reference:System.dll /reference:System.Windows.Forms.dll /reference:System.Drawing.dll /reference:System.Management.dll /reference:"%SPEECH_DLL%" BatteryMonitor.cs
 
 if %ERRORLEVEL% NEQ 0 (
     echo ============================================
